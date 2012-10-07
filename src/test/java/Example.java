@@ -12,6 +12,7 @@ public class Example {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 		final HelpBroker broker = new HelpSet(null, Example.class.getResource("/javahelp/jhelpset.hs")).createHelpBroker();
+		broker.setCurrentID("Index");
 		broker.setDisplayed(true);
 	}
 }
