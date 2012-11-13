@@ -38,7 +38,7 @@
                     <!-- generate the Java Help search index and put it in with the rest of the files -->
                     <execution>
                         <id>generate-javahelp-search-index</id>
-                        <phase>process-resources</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -46,7 +46,7 @@
                             <target>
                                 <java classname="com.sun.java.help.search.Indexer" failonerror="true">
                                     <arg value="-db"/>
-                                    <arg value="target/classes/javahelp"/>
+                                    <arg value="target/generated-sources/jhelp/javahelp"/>
                                     <arg value="src/main/resources/javahelp"/>
                                 </java>
                             </target>
@@ -60,6 +60,27 @@
                         <version>${javahelp.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>target/generated-sources/jhelp</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
